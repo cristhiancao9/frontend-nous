@@ -1,0 +1,88 @@
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 24px 0;
+  width: 100%;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  position: relative;
+}
+
+.step:last-child .connector {
+  display: none;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  border: 2px solid var(--border-normal);
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  transition: all var(--transition-base);
+  z-index: 1;
+}
+
+.step.active .indicator {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: var(--accent-primary-15);
+  box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.12);
+}
+
+.step.done .indicator {
+  border-color: var(--accent-secondary);
+  background: var(--accent-secondary);
+  color: #0D0F14;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: color var(--transition-base);
+}
+
+.step.active .label {
+  color: var(--text-primary);
+}
+
+.step.done .label {
+  color: var(--accent-secondary);
+}
+
+/* Connector line */
+.connector {
+  flex: 1;
+  height: 2px;
+  background: var(--border-subtle);
+  margin: 0 8px;
+  transition: background var(--transition-base);
+}
+
+.connector.connectorDone {
+  background: var(--accent-secondary);
+}
+
+/* Content area */
+.content {
+  animation: fadeIn 200ms ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

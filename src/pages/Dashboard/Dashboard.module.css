@@ -1,0 +1,229 @@
+/* ── Layout principal ── */
+.page {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Header ── */
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pageDate {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 4px 0 0 0;
+  text-transform: capitalize;
+}
+
+/* ── Botón actualizar ── */
+.refreshBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--border-subtle, #1F2433);
+  color: var(--text-secondary, #6B7A99);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.refreshBtn:hover:not(:disabled) {
+  background: var(--bg-surface, #131720);
+  color: var(--text-primary, #C9D1E3);
+}
+
+.refreshBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinning {
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Grid de métricas ── */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1100px) {
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Card compartida (gráfica + tabla) ── */
+.chartCard,
+.tableCard {
+  background: var(--bg-surface, #131720);
+  border: 1px solid var(--border-subtle, #1F2433);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* ── Título de sección dentro de card ── */
+.chartTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary, #C9D1E3);
+  margin: 0 0 20px 0;
+}
+
+/* ── Cabecera de tabla ── */
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.tableBadge {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #6B7A99);
+  background: var(--bg-subtle, #1A1F2E);
+  border: 1px solid var(--border-subtle, #1F2433);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+/* ── Alertas ── */
+.alertasGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alertaCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-family: var(--font-base);
+}
+
+.alertaWarning {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: #f59e0b;
+}
+
+.alertaInfo {
+  background: rgba(247, 90, 90, 0.08);
+  border: 1px solid rgba(247, 90, 90, 0.25);
+  color: var(--color-error);
+}
+
+.alertaHint {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* ── Gráfico vacío ── */
+.chartEmpty {
+  text-align: center;
+  padding: 48px 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* ── Caja cerrada tag ── */
+.cajaCerradaTag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(247, 90, 90, 0.12);
+  color: var(--color-error);
+  vertical-align: middle;
+}
+
+/* ── Tabla ventas ── */
+.facturaNum {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.metodoPago {
+  text-transform: capitalize;
+  font-size: 0.875rem;
+}
+
+.estadoChip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.estadoActiva {
+  background: rgba(0, 212, 170, 0.12);
+  color: var(--accent-secondary);
+}
+.estadoAnulada {
+  background: rgba(247, 90, 90, 0.12);
+  color: var(--color-error);
+}
+
+.feChip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(79, 110, 247, 0.12);
+  color: var(--accent-primary);
+  text-transform: capitalize;
+}
+
+.posChip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--border-subtle);
+  color: var(--text-muted);
+}
+
+/* ── Tendencias ── */
+.trendUp    { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; color: var(--accent-secondary); }
+.trendDown  { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; color: var(--color-error); }
+.trendNeutral { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; color: var(--text-muted); }
+
+/* ── Responsive padding ── */
+@media (max-width: 640px) {
+  .page { padding: 16px; }
+  .pageHeader { flex-direction: column; gap: 12px; }
+}

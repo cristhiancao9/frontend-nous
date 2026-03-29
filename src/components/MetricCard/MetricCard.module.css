@@ -1,0 +1,115 @@
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+  box-shadow: var(--shadow-card);
+}
+
+.card:hover {
+  border-color: var(--border-normal);
+  box-shadow: var(--shadow-hover-primary);
+}
+
+.card.loading {
+  pointer-events: none;
+}
+
+/* Icon */
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.accent-primary {
+  background: var(--accent-primary-15);
+  color: var(--accent-primary);
+}
+
+.accent-secondary {
+  background: var(--accent-secondary-15);
+  color: var(--accent-secondary);
+}
+
+.accent-warning {
+  background: var(--color-warning-15);
+  color: var(--color-warning);
+}
+
+.accent-error {
+  background: var(--color-error-15);
+  color: var(--color-error);
+}
+
+/* Label */
+.label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Value */
+.value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.skeleton {
+  display: block;
+  width: 120px;
+  height: 32px;
+  background: linear-gradient(
+    90deg,
+    var(--border-subtle) 25%,
+    var(--border-normal) 50%,
+    var(--border-subtle) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--radius-sm);
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Trend */
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.trend-up {
+  background: var(--accent-secondary-15);
+  color: var(--accent-secondary);
+}
+
+.trend-down {
+  background: var(--color-error-15);
+  color: var(--color-error);
+}
+
+.trend-neutral {
+  background: var(--border-subtle);
+  color: var(--text-secondary);
+}

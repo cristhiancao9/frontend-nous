@@ -1,0 +1,739 @@
+/* ── Layout ── */
+.page {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pageSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.loadingMsg {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+}
+
+/* ── Back button ── */
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  font-family: var(--font-base);
+}
+.backBtn:hover {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+/* ── Search card ── */
+.searchCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 16px 20px;
+}
+
+.searchWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 42px;
+  padding: 0 40px;
+  background: var(--bg-main);
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-input);
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  outline: none;
+  font-family: var(--font-base);
+  transition: border-color var(--transition-base);
+}
+.searchInput:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.15);
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.searchSpinner {
+  position: absolute;
+  right: 14px;
+  color: var(--text-muted);
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Ventas list (paso 1) ── */
+.ventasList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ventaRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-base);
+  transition: border-color 0.18s, background 0.18s;
+  width: 100%;
+}
+.ventaRow:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-surface-hover, var(--bg-surface));
+}
+
+.ventaNum {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 120px;
+}
+
+.ventaInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.ventaFecha {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.ventaTotal {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--accent-secondary);
+}
+
+.ventaMetodo {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  min-width: 80px;
+  text-align: right;
+  text-transform: capitalize;
+}
+
+.ventaChevron {
+  color: var(--text-muted);
+}
+
+/* ── Empty state ── */
+.emptyMsg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 24px;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+.emptyIcon {
+  color: var(--border-subtle);
+}
+
+/* ── Paso 2 layout ── */
+.paso2Grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.colItems {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.colForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 24px;
+}
+
+/* ── Section card ── */
+.sectionCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 20px;
+}
+
+.sectionTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.sectionSub {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin: 0 0 16px 0;
+}
+
+/* ── Items list ── */
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-main);
+  transition: border-color 0.15s, background 0.15s;
+}
+.itemRowSel {
+  border-color: var(--accent-primary);
+  background: rgba(79, 110, 247, 0.05);
+}
+
+.itemCheck {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--accent-primary);
+  padding: 0;
+  display: flex;
+}
+
+.itemCheckEmpty {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border-normal);
+}
+
+.itemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itemNombre {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.itemMeta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.itemPrecio {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  min-width: 80px;
+  text-align: right;
+}
+
+.itemCantWrap {
+  min-width: 56px;
+  text-align: right;
+}
+
+.itemCant {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.itemCantInput {
+  width: 52px;
+  height: 30px;
+  padding: 0 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--accent-primary);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  text-align: center;
+  outline: none;
+  font-family: var(--font-base);
+}
+
+/* ── Buscar producto (cambio) ── */
+.buscarProd {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.buscarInputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.buscarIcon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.buscarInput {
+  width: 100%;
+  height: 38px;
+  padding: 0 36px;
+  background: var(--bg-main);
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-input);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  font-family: var(--font-base);
+  transition: border-color var(--transition-base);
+}
+.buscarInput:focus {
+  border-color: var(--accent-primary);
+}
+
+.buscarSpinner {
+  position: absolute;
+  right: 12px;
+  color: var(--text-muted);
+  animation: spin 0.8s linear infinite;
+}
+
+.buscarDropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  z-index: 20;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+.buscarOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  font-family: var(--font-base);
+  text-align: left;
+  transition: background 0.12s;
+}
+.buscarOption:last-child { border-bottom: none; }
+.buscarOption:hover { background: var(--bg-main); }
+
+.buscarOptionNombre {
+  flex: 1;
+  font-weight: 500;
+}
+
+.buscarOptionMeta {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.buscarOptionPrecio {
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+
+/* ── Cambio items ── */
+.cambioList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cambioItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg-main);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.cambioNombre {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.cambioPrecio {
+  font-size: 0.875rem;
+  color: var(--accent-secondary);
+  font-weight: 600;
+  min-width: 80px;
+  text-align: right;
+}
+
+.cambioRemove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  transition: color 0.15s, background 0.15s;
+}
+.cambioRemove:hover {
+  color: var(--color-error);
+  background: var(--color-error-15);
+}
+
+/* ── Tipo grid ── */
+.tipoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.tipoBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 12px;
+  border-radius: 10px;
+  border: 2px solid var(--border-subtle);
+  background: var(--bg-main);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: var(--font-base);
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.tipoBtn span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: inherit;
+}
+.tipoBtn small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.tipoBtn:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+.tipoBtnActive {
+  border-color: var(--accent-primary);
+  background: rgba(79, 110, 247, 0.08);
+  color: var(--accent-primary);
+}
+.tipoBtnActive small { color: var(--accent-primary); opacity: 0.7; }
+
+/* ── Motivo ── */
+.motivoInput {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg-main);
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-input);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: var(--font-base);
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--transition-base);
+  box-sizing: border-box;
+}
+.motivoInput:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.15);
+}
+
+/* ── Resumen ── */
+.resumenCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.resumenRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.resumenDif {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.resumenPos { color: var(--accent-secondary); }
+.resumenNeg { color: var(--color-error); }
+.resumenAdicional { color: var(--accent-primary); }
+
+.resumenAviso {
+  font-size: 0.8rem;
+  color: var(--color-error);
+  margin: 0;
+  padding: 8px 10px;
+  background: var(--color-error-15);
+  border-radius: 6px;
+  line-height: 1.4;
+}
+
+/* Selector método de pago adicional */
+.metodoPagoWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(79, 110, 247, 0.06);
+  border: 1px solid rgba(79, 110, 247, 0.2);
+  border-radius: 8px;
+}
+
+.metodoPagoLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.metodoPagoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.metodoPagoBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-main);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-family: var(--font-base);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.metodoPagoBtn:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+.metodoPagoBtnActive {
+  border-color: var(--accent-primary);
+  background: rgba(79, 110, 247, 0.1);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* Input efectivo */
+.efectivoWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 4px;
+}
+
+.efectivoLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.efectivoInput {
+  height: 40px;
+  padding: 0 12px;
+  background: var(--bg-main);
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-input);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-base);
+  outline: none;
+  transition: border-color var(--transition-base);
+  width: 100%;
+  box-sizing: border-box;
+}
+.efectivoInput:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.15);
+}
+.efectivoInputError {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px var(--color-error-15);
+}
+
+.cambioRow {
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 8px 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+.cambioOk {
+  background: rgba(0, 212, 170, 0.1);
+  color: var(--accent-secondary);
+}
+.cambioInsuf {
+  background: var(--color-error-15);
+  color: var(--color-error);
+}
+
+/* ── Submit ── */
+.btnSubmit {
+  width: 100%;
+  height: 44px;
+  background: var(--accent-primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-base);
+  transition: opacity 0.18s;
+  margin-top: 4px;
+}
+.btnSubmit:hover:not(:disabled) { opacity: 0.9; }
+.btnSubmit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Resultado ── */
+.resultadoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 64px 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  text-align: center;
+}
+
+.resultadoIcon {
+  color: var(--accent-secondary);
+}
+
+.resultadoTitle {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.resultadoId {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-family: monospace;
+  margin: 0;
+}
+
+.resultadoDif {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.difPos {
+  background: var(--accent-secondary-15);
+  color: var(--accent-secondary);
+}
+.difNeg {
+  background: var(--color-error-15);
+  color: var(--color-error);
+}
+.difCobro {
+  background: rgba(79, 110, 247, 0.1);
+  color: var(--accent-primary);
+  font-size: 1.05rem;
+}
+
+.btnPrimary {
+  padding: 12px 32px;
+  background: var(--accent-primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-base);
+  transition: opacity 0.18s;
+  margin-top: 8px;
+}
+.btnPrimary:hover { opacity: 0.9; }
