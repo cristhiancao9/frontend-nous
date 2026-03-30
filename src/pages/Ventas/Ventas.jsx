@@ -401,20 +401,52 @@ function Ventas() {
   const [detalleOpen, setDetalleOpen]     = useState(false);
   const [anularOpen, setAnularOpen]       = useState(false);
 
-  /* Date helpers (no date-fns) */
-  const toISODate = (date) => date.toISOString().slice(0, 10);
+  /* Date helpers — Colombia timezone (UTC-5) */
+  const toColDate = (date = new Date()) =>
+    date.toLocaleDateString('en-CA', { timeZone: 'America/Bogota' });
 
-  const todayStart = toISODate(new Date());
-  const todayEnd   = toISODate(new Date());
+  const getColYear  = () => new Date().toLocaleString('en-CA', { timeZone: 'America/Bogota', year: 'numeric' });
+  const getColMonth = () => new Date().toLocaleString('en-CA', { timeZone: 'America/Bogota', month: '2-digit' });
 
-  const { register, watch } = useForm({
+  const today = toColDate();
+
+  const { register, watch, setValue } = useForm({
     defaultValues: {
-      fecha_inicio: todayStart,
-      fecha_fin:    todayEnd,
+      fecha_inicio: today,
+      fecha_fin:    today,
     },
   });
   const fecha_inicio = watch('fecha_inicio');
   const fecha_fin    = watch('fecha_fin');
+
+  const aplicarFiltro = (inicio, fin) => {
+    setValue('fecha_inicio', inicio);
+    setValue('fecha_fin',    fin);
+  };
+
+  const filtroHoy = () => aplicarFiltro(today, today);
+
+  const filtroEsteMes = () => {
+    const year  = getColYear();
+    const month = getColMonth();
+    const ultimo = new Date(year, parseInt(month), 0); // último día del mes
+    aplicarFiltro(`${year}-${month}-01`, toColDate(ultimo));
+  };
+
+  const filtroMesPasado = () => {
+    const now   = new Date();
+    const col   = new Date(now.toLocaleString('en-US', { timeZone: 'America/Bogota' }));
+    const year  = col.getMonth() === 0 ? col.getFullYear() - 1 : col.getFullYear();
+    const month = col.getMonth() === 0 ? 12 : col.getMonth(); // getMonth() es 0-indexed
+    const mm    = String(month).padStart(2, '0');
+    const ultimo = new Date(year, month, 0);
+    aplicarFiltro(`${year}-${mm}-01`, toColDate(ultimo));
+  };
+
+  const filtroEsteAnio = () => {
+    const year = getColYear();
+    aplicarFiltro(`${year}-01-01`, `${year}-12-31`);
+  };
 
   const { data, isLoading, isError, refetch } = useVentasByTienda(user?.tienda_id, {
     fecha_inicio,
@@ -479,6 +511,12 @@ function Ventas() {
 
       {/* Filtros */}
       <div className={styles.filtersCard}>
+        <div className={styles.quickFilters}>
+          <button type="button" className={styles.qfBtn} onClick={filtroHoy}>Hoy</button>
+          <button type="button" className={styles.qfBtn} onClick={filtroEsteMes}>Este mes</button>
+          <button type="button" className={styles.qfBtn} onClick={filtroMesPasado}>Mes pasado</button>
+          <button type="button" className={styles.qfBtn} onClick={filtroEsteAnio}>Este año</button>
+        </div>
         <div className={styles.filtersRow}>
           <div className={styles.filterField}>
             <label className={styles.filterLabel}>Desde</label>
