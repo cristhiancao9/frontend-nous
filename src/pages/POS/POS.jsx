@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import {
-  ShoppingCart, Trash2, Plus, Minus, Search,
+  ShoppingCart, Trash2, Plus, Minus, Search, X,
   CreditCard, Banknote, ArrowLeftRight, Layers,
   ChevronDown, ChevronUp, FileText, Zap, User,
 } from 'lucide-react';
@@ -21,6 +21,7 @@ export default function POS() {
   const eanRef    = useRef(null);
   const [drawerOpen,    setDrawerOpen]    = useState(false);
   const [historialOpen, setHistorialOpen] = useState(false);
+  const [opcionesRef,   setOpcionesRef]   = useState(null); // array de SKUs cuando hay varias tallas
 
   const {
     form, fields, remove, update,
@@ -36,18 +37,23 @@ export default function POS() {
   const { data: busquedaData, isLoading: buscando, isError: eanError } =
     useBuscarProductoEAN(eanQuery, user?.tienda_id, { enabled: !!eanQuery });
 
-  // Cuando llega el resultado del EAN → agregar al ticket
+  // Cuando llega el resultado del EAN / referencia → agregar al ticket o mostrar picker
   useEffect(() => {
-    if (!busquedaData?.producto) return;
-    agregarItem(busquedaData.producto);
+    if (!busquedaData) return;
+    if (busquedaData.producto) {
+      agregarItem(busquedaData.producto);
+    } else if (busquedaData.productos?.length > 0) {
+      setOpcionesRef(busquedaData.productos);
+    }
   }, [busquedaData]);
 
-  // Mostrar error si EAN no encontrado
+  // Mostrar error si EAN/referencia no encontrado
   useEffect(() => {
     if (eanError && eanQuery) {
       toast.warning(`Producto no encontrado: ${eanQuery}`);
       setEanQuery('');
       setValue('ean_busqueda', '');
+      setOpcionesRef(null);
     }
   }, [eanError]);
 
@@ -212,6 +218,38 @@ export default function POS() {
             {buscando ? 'Consultando inventario...' : 'Presiona Enter para agregar'}
           </p>
         </div>
+
+        {/* Picker de talla cuando se busca por referencia */}
+        {opcionesRef && (
+          <div className={styles.tallaPickerWrap}>
+            <div className={styles.tallaPickerHeader}>
+              <span>
+                <strong>{opcionesRef[0]?.nombre}</strong>
+                <em className={styles.tallaPickerRef}> · {opcionesRef[0]?.referencia_base}</em>
+              </span>
+              <button type="button" className={styles.tallaPickerClose}
+                onClick={() => { setOpcionesRef(null); setEanQuery(''); setValue('ean_busqueda', ''); }}>
+                <X size={14} />
+              </button>
+            </div>
+            <div className={styles.tallaGrid}>
+              {opcionesRef.map((sku) => (
+                <button
+                  key={sku.sku_id}
+                  type="button"
+                  disabled={sku.stock_actual <= 0}
+                  className={`${styles.tallaBtn} ${sku.stock_actual <= 0 ? styles.tallaSinStock : ''}`}
+                  onClick={() => { agregarItem(sku); setOpcionesRef(null); }}
+                >
+                  <span className={styles.tallaCodigo}>{sku.talla}</span>
+                  <span className={styles.tallaStock}>
+                    {sku.stock_actual > 0 ? `${sku.stock_actual} uds` : 'Sin stock'}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className={styles.paySection}>
           <label className={styles.fieldLabel}>Forma de pago</label>

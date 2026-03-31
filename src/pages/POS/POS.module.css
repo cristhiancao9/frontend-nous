@@ -354,6 +354,83 @@
   margin-top: 5px;
 }
 
+/* Picker de talla (búsqueda por referencia) */
+.tallaPickerWrap {
+  background: var(--bg-base);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-card);
+  padding: 12px 14px;
+  margin-top: 4px;
+}
+
+.tallaPickerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.tallaPickerRef {
+  font-style: normal;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.tallaPickerClose {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+.tallaPickerClose:hover { color: var(--text-primary); }
+
+.tallaGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tallaBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  min-width: 60px;
+}
+.tallaBtn:not(:disabled):hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.tallaBtn:not(:disabled):hover .tallaStock { color: rgba(255,255,255,0.8); }
+
+.tallaSinStock {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tallaCodigo {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tallaStock {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
 /* Forma de pago */
 .paySection {}
 
