@@ -1,11 +1,13 @@
-import { User, Store, LogOut, AlertCircle, CheckCircle } from 'lucide-react';
+import { User, Store, LogOut, AlertCircle, CheckCircle, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useCaja } from '../../context/CajaContext';
+import { useTheme } from '../../context/ThemeContext';
 import styles from './Header.module.css';
 
 function Header({ sidebarCollapsed }) {
   const { user, logout } = useAuth();
   const { cajaActiva } = useCaja();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header
@@ -37,6 +39,14 @@ function Header({ sidebarCollapsed }) {
             <span className={styles.userRole}>{user?.rol ?? ''}</span>
           </div>
         </div>
+        <button
+          type="button"
+          className={styles.themeBtn}
+          onClick={toggleTheme}
+          title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+        >
+          {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+        </button>
         <button
           type="button"
           className={styles.logoutBtn}

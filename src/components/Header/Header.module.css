@@ -87,6 +87,24 @@
   text-transform: capitalize;
 }
 
+.themeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-btn);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-base);
+}
+
+.themeBtn:hover {
+  background: var(--accent-primary-15);
+  color: var(--accent-primary);
+  border-color: rgba(79, 110, 247, 0.3);
+}
+
 .logoutBtn {
   display: flex;
   align-items: center;

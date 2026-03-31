@@ -28,7 +28,7 @@
   /* Text */
   --text-primary:   #F0F2F8;
   --text-secondary: #6B7A99;
-  --text-muted:     #3D4A63;
+  --text-muted:     #4F6EF7;
 
   /* Radius */
   --radius-card:  12px;
@@ -64,6 +64,29 @@
   --sidebar-width: 240px;
   --sidebar-collapsed: 64px;
   --header-height: 60px;
+}
+
+/* ─── LIGHT MODE ─────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-main:        #F5F7FB;
+  --bg-surface:     #FFFFFF;
+  --bg-elevated:    #EEF1F8;
+
+  /* Borders */
+  --border-subtle:  #E2E8F2;
+  --border-normal:  #C9D4E8;
+
+  /* Text */
+  --text-primary:   #0D1226;
+  --text-secondary: #4A5878;
+  --text-muted:     #8A97B0;
+
+  /* Shadows */
+  --shadow-card:   0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-modal:  0 24px 64px rgba(0, 0, 0, 0.18);
+  --shadow-hover-primary:   0 4px 20px rgba(79, 110, 247, 0.2);
+  --shadow-hover-secondary: 0 4px 20px rgba(0, 212, 170, 0.2);
 }
 
 /* ─── RESET ──────────────────────────────────────────────────────────── */
@@ -109,6 +132,10 @@ button {
 input, textarea, select {
   font-family: inherit;
 }
+
+/* color-scheme para inputs de tipo date */
+:root { color-scheme: dark; }
+[data-theme="light"] { color-scheme: light; }
 
 ul, ol {
   list-style: none;
